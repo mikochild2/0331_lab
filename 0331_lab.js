@@ -21,7 +21,7 @@ var slideshow = {
             this.currentPhotoIndex++;
             return this.photoList[this.currentPhotoIndex];
         } else {
-            return "End of slideshow";
+            return this.pause(),"End of slideshow"; 
         }
     },
     prevPhoto: function() {
@@ -34,15 +34,19 @@ var slideshow = {
     },
     getCurrentPhoto: function() {
         return this.photoList[this.currentPhotoIndex];
+    },
+    playInterval: null,
+    play: function() {
+        var self = this;
+      this.playInterval = setInterval(function() {
+      return  console.log(self.nextPhoto());
+    }, 2000);
+  },
+    pause: function() {
+        var self = this
+        clearInterval(self.playInterval);
     }
-}
+};
 
 console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.nextPhoto());
-console.log(slideshow.getCurrentPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
-console.log(slideshow.prevPhoto());
+slideshow.play();
